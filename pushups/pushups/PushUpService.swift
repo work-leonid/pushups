@@ -9,12 +9,30 @@ import Foundation
 
 class PushUpService: ObservableObject {
     @Published var pushUpCount = 0
-    @Published var pushUpArray = [Int]()
+    @Published var pushUpsCurrentWorkout = [Int]()
+    @Published var pushUpsByDays = [[Int]]()
     
-    var pushUpArrayItems: String {
-        let arr = pushUpArray.map { String($0) }
+    private let userDefaults = UserDefaults.standard
+    private let userDefaultsPushUpsCountKey = "pushups_count"
+    
+    var pushUpsCurrentWorkoutString: String {
+        let arr = pushUpsCurrentWorkout.map { String($0) }
         let str = arr.joined(separator: ", ")
         return str
+    }
+    
+    var pushUpsByDaysString: String {
+//        var str = ""
+//        for i in pushUpsByDays.indices {
+//            let arr = pushUpsByDays[i].map { String($0) }
+//            str = arr.joined(separator: ". ")
+//        }
+//        print(pushUpsByDays)
+//        let flatten = Array(pushUpsByDays.joined())
+//        print(flatten)
+//        let arr = pushUpsByDays.map { String($0) }
+//        let str = arr.joined(separator: ". ")
+        return "str"
     }
     
     func increment() -> Int {
@@ -22,8 +40,17 @@ class PushUpService: ObservableObject {
         return pushUpCount
     }
     
-    func stopWorkout() {
-        pushUpArray.append(pushUpCount)
+    func addToCurrentDayWorkout() {
+        pushUpsCurrentWorkout.append(pushUpCount)
         pushUpCount = 0
+    }
+    
+    func saveDay() {
+        pushUpsByDays.append(pushUpsCurrentWorkout)
+        pushUpCount = 0
+        pushUpsCurrentWorkout = [Int]()
+//        for i in pushUpsByDays.indices {
+//            print(i)
+//        }
     }
 }
