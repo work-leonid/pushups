@@ -8,9 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var pushUpService = PushUpService()
+    
     var body: some View {
-        Text("Hello, world!")
+        VStack {
+            Text("\(pushUpService.pushUpArrayItems)")
+                .padding()
+            
+            Text("\(pushUpService.pushUpCount)")
+                .padding()
+            
+            Button(action: {
+                pushUpService.increment()
+            }, label: {
+                Text("Add pushup")
+            })
             .padding()
+            
+            Button(action: {
+                pushUpService.stopWorkout()
+            }, label: {
+                Text("Stop pushup")
+            })
+        }
+        
     }
 }
 
