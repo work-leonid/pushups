@@ -11,7 +11,7 @@ struct ContentView: View {
     
     @StateObject var pushUpService = PushUpService()
     
-//    MARK: Button for adding pushups
+    //    MARK: Button for adding pushups
     var addPushUpsToCurrentWorkout: some View {
         HStack {
             Button(action: {
@@ -80,13 +80,11 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                     }
                     
-                    HStack {
-                        Button(action: {
-                            pushUpService.saveDay()
-                        }, label: {
-                            Text("Save This Day")
-                        })
-                    }
+                    Button(action: {
+                        pushUpService.saveDay()
+                    }, label: {
+                        Text("Save This Day")
+                    })
                     .frame(maxWidth: .infinity)
                     .buttonStyle(BorderlessButtonStyle())
                     .foregroundColor(pushUpService.endWorkout ? .blue : .gray)
