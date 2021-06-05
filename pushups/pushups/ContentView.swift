@@ -64,7 +64,7 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity)
                     } else {
                         HStack {
-                            Text("Left \(pushUpService.pushUpsLeft) ")
+                            Text("Push Ups Left \(pushUpService.pushUpsLeft) ")
                             Spacer()
                             Text("\(pushUpService.convertCurrentWorkoutsToString())")
                                 .fontWeight(.bold)
@@ -87,6 +87,8 @@ struct ContentView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .buttonStyle(BorderlessButtonStyle())
+                    .foregroundColor(pushUpService.endWorkout ? .blue : .gray)
+                    .disabled(pushUpService.endWorkout ? false : true)
                 }
                 
                 Section(header: Text("Push Ups by Days")) {
