@@ -29,23 +29,36 @@ struct ContentView: View {
                         }, label: {
                             Image(systemName: "plus.circle.fill")
                         })
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            pushUpService.addToCurrentDayWorkout()
+                        }, label: {
+                            Text("Add")
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 24)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .clipShape(Capsule())
+                        })
+                        .font(.title3)
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
                     .font(.largeTitle)
                     .buttonStyle(BorderlessButtonStyle())
                     
-                    Text("Today pushups: 0")
+                    Text("Today pushups: \(pushUpService.pushUpsCurrentWorkoutString)")
                     
                     HStack {
-                        Button(action: {}, label: {
-                            Text("Add to Workout")
-                        })
-                        Spacer()
-                        Button(action: {}, label: {
+                        Button(action: {
+                            pushUpService.saveDay()
+                        }, label: {
                             Text("Save This Day")
                         })
                     }
+                    .frame(maxWidth: .infinity)
                     .buttonStyle(BorderlessButtonStyle())
                 }
                 
@@ -54,16 +67,6 @@ struct ContentView: View {
                     Text("Push")
                 }
                 
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button(action: {}, label: {
-                        Text("Add button")
-                    })
-                    Button(action: {}, label: {
-                        Text("Add button")
-                    })
-                }
             }
             .navigationBarTitle("PushUps")
         }
