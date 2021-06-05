@@ -56,7 +56,7 @@ struct ContentView: View {
                     
                     addPushUpsToCurrentWorkout
                     
-                    if pushUpService.pushUpsCurrentWorkoutString.isEmpty {
+                    if pushUpService.allPushUpsCurrentWorkout.isEmpty {
                         Text("Add You First Push Up")
                             .foregroundColor(.gray)
                             .frame(maxWidth: .infinity)
@@ -64,7 +64,7 @@ struct ContentView: View {
                         HStack {
                             Text("Today pushups: ")
                             Spacer()
-                            Text("\(pushUpService.pushUpsCurrentWorkoutString)")
+                            Text("\(pushUpService.convertCurrentWorkoutsToString())")
                                 .fontWeight(.bold)
                         }
                         .frame(maxWidth: .infinity)
@@ -82,15 +82,15 @@ struct ContentView: View {
                 }
                 
                 Section(header: Text("Push Ups by Days")) {
-                    if pushUpService.pushUpsByDaysString.isEmpty {
+                    if pushUpService.allWorkouts.isEmpty {
                         Text("Empty")
                             .foregroundColor(.gray)
                     } else {
-                        ForEach(0..<pushUpService.pushUpsByDaysString.count, id:\.self) { day in
+                        ForEach(0..<pushUpService.allWorkouts.count, id:\.self) { day in
                             HStack {
                                 Text("Day \(day + 1)")
                                 Spacer()
-                                Text("\(pushUpService.pushUpsByDaysString[day])")
+                                Text("\(pushUpService.allWorkouts[day])")
                             }
                         }
                     }
