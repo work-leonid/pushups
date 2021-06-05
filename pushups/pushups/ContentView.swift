@@ -19,6 +19,8 @@ struct ContentView: View {
             }, label: {
                 Image(systemName: "minus.circle.fill")
             })
+            .foregroundColor(pushUpService.pushUpCount > 0 ? Color.blue : Color.gray)
+            .disabled(pushUpService.pushUpCount > 0 ? false : true)
             
             Text("\(pushUpService.pushUpCount)")
                 .frame(minWidth: 40)
