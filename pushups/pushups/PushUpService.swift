@@ -12,9 +12,6 @@ class PushUpService: ObservableObject {
     @Published var pushUpsCurrentWorkout = [Int]()
     @Published var pushUpsByDays = [[Int]]()
     
-    private let userDefaults = UserDefaults.standard
-    private let userDefaultsPushUpsCountKey = "pushups_count"
-    
     var pushUpsCurrentWorkoutString: String {
         let arr = pushUpsCurrentWorkout.map { String($0) }
         let str = arr.joined(separator: ", ")
