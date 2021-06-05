@@ -21,6 +21,7 @@ struct ContentView: View {
             })
             
             Text("\(pushUpService.pushUpCount)")
+                .frame(minWidth: 40)
             
             Button(action: {
                 pushUpService.incrementPushUps()
@@ -28,22 +29,23 @@ struct ContentView: View {
                 Image(systemName: "plus.circle.fill")
             })
             
-            Spacer()
+            Spacer(minLength: 30)
             
             Button(action: {
                 pushUpService.addToCurrentDayWorkout()
             }, label: {
                 Text("Add")
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 24)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .clipShape(Capsule())
+                    .padding(.vertical, 8)
+                    .frame(maxWidth: .infinity)
+                    .background(pushUpService.pushUpCount > 0 ? Color.green : Color.gray)
             })
+            .foregroundColor(.white)
+            .clipShape(Capsule())
             .font(.title3)
+            .disabled(pushUpService.pushUpCount > 0 ? false : true)
         }
         .disabled(pushUpService.endWorkout ? true : false)
-        .padding()
+        .padding(.vertical)
         .frame(maxWidth: .infinity)
         .font(.largeTitle)
         .buttonStyle(BorderlessButtonStyle())
@@ -62,10 +64,16 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity)
                     } else {
                         HStack {
-                            Text("Today pushups: ")
+                            Text("Left \(pushUpService.pushUpsLeft) ")
                             Spacer()
                             Text("\(pushUpService.convertCurrentWorkoutsToString())")
                                 .fontWeight(.bold)
+                            Button(action: {
+                                pushUpService.resetWorkout()
+                            }, label: {
+                                Image(systemName: "xmark")
+                            })
+                            .buttonStyle(BorderlessButtonStyle())
                         }
                         .frame(maxWidth: .infinity)
                     }
@@ -101,13 +109,14 @@ struct ContentView: View {
                     Button(action: {
                         pushUpService.clearAllData()
                     }, label: {
-                        Image(systemName: "circle")
+                        Label("Reset", systemImage: "trash.fill")
                     })
                 }
             }
             .navigationBarTitle("PushUps")
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -12,8 +12,9 @@ class PushUpService: ObservableObject {
     @Published var allPushUpsCurrentWorkout = [Int]()
     @Published var allWorkouts = [String]()
     @Published var endWorkout = false
+    @Published var pushUpsLeft = maxPushUpsCurrentWorkout
     
-    private let maxPushUpsCurrentWorkout = 4
+    static private let maxPushUpsCurrentWorkout = 4
     static private let userDefaultsPushUpsByDaysKey = "pushupsByDaysCount"
     
     var allWorkoutsUserDefaults: [[Int]] {
@@ -54,13 +55,15 @@ class PushUpService: ObservableObject {
             pushUpCount = 0
         }
         
-        if allPushUpsCurrentWorkout.count == maxPushUpsCurrentWorkout {
+        pushUpsLeft -= 1
+        
+        if allPushUpsCurrentWorkout.count == PushUpService.maxPushUpsCurrentWorkout {
             endWorkout = true
         }
     }
     
     func saveDay() {
-        if !allPushUpsCurrentWorkout.isEmpty {
+        if !(allPushUpsCurrentWorkout.count < PushUpService.maxPushUpsCurrentWorkout)  {
             let currentWorkoutsString = convertCurrentWorkoutsToString()
             allWorkouts.append(currentWorkoutsString)
             resetWorkout()
@@ -69,6 +72,7 @@ class PushUpService: ObservableObject {
     
     func resetWorkout() {
         pushUpCount = 0
+        pushUpsLeft = PushUpService.maxPushUpsCurrentWorkout
         allPushUpsCurrentWorkout = [Int]()
         endWorkout = false
     }
