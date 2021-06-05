@@ -63,46 +63,19 @@ struct ContentView: View {
                 }
                 
                 
-                Section(header: Text("Second")) {
-                    Text("Push")
+                Section(header: Text("Workout Days")) {
+                    if pushUpService.pushUpsByDaysString.isEmpty {
+                        Text("Empy")
+                    } else {
+                        ForEach(0..<pushUpService.pushUpsByDaysString.count, id:\.self) { day in
+                            Text("\(pushUpService.pushUpsByDaysString[day])")
+                        }
+                    }
                 }
                 
             }
             .navigationBarTitle("PushUps")
         }
-        //        VStack {
-        //            Group {
-        //                Text("By day: \(pushUpService.pushUpsByDaysString)")
-        //                    .padding()
-        //
-        //                Text("Current: \(pushUpService.pushUpsCurrentWorkoutString)")
-        //                    .padding()
-        //            }
-        //
-        //            Text("\(pushUpService.pushUpCount)")
-        //                .padding()
-        //
-        //            Button(action: {
-        //                pushUpService.increment()
-        //            }, label: {
-        //                Text("Add pushup")
-        //            })
-        //            .padding()
-        //
-        //            Button(action: {
-        //                pushUpService.addToCurrentDayWorkout()
-        //            }, label: {
-        //                Text("Add to workout")
-        //            })
-        //            .padding()
-        //
-        //            Button(action: {
-        //                pushUpService.saveDay()
-        //            }, label: {
-        //                Text("Save day")
-        //            })
-        //        }
-        
     }
 }
 
