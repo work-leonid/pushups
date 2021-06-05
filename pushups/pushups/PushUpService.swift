@@ -35,8 +35,17 @@ class PushUpService: ObservableObject {
         return "str"
     }
     
-    func increment() -> Int {
+    func incrementPushUps() -> Int {
         pushUpCount += 1
+        return pushUpCount
+    }
+    
+    func dicrementPushUps() -> Int {
+        if pushUpCount == 0 {
+            pushUpCount = 0
+        } else {
+            pushUpCount -= 1
+        }
         return pushUpCount
     }
     

@@ -14,20 +14,54 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("First")) {
-                    Text("Push")
-                    Text("Push")
+                Section {
+                    HStack {
+                        Button(action: {
+                            pushUpService.dicrementPushUps()
+                        }, label: {
+                            Image(systemName: "minus.circle.fill")
+                        })
+                        
+                        Text("\(pushUpService.pushUpCount)")
+                        
+                        Button(action: {
+                            pushUpService.incrementPushUps()
+                        }, label: {
+                            Image(systemName: "plus.circle.fill")
+                        })
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .font(.largeTitle)
+                    .buttonStyle(BorderlessButtonStyle())
                     
+                    Text("Today pushups: 0")
+                    
+                    HStack {
+                        Button(action: {}, label: {
+                            Text("Add to Workout")
+                        })
+                        Spacer()
+                        Button(action: {}, label: {
+                            Text("Save This Day")
+                        })
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
                 }
+                
+                
                 Section(header: Text("Second")) {
                     Text("Push")
                 }
                 
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Button(action: {}, label: {
-                        Image(systemName: "circle")
+                        Text("Add button")
+                    })
+                    Button(action: {}, label: {
+                        Text("Add button")
                     })
                 }
             }
