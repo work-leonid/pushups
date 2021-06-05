@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @StateObject var pushUpService = PushUpService()
     
+//    MARK: Button for adding pushups
     var addPushUpsToCurrentWorkout: some View {
         HStack {
             Button(action: {
@@ -41,6 +42,7 @@ struct ContentView: View {
             })
             .font(.title3)
         }
+        .disabled(pushUpService.endWorkout ? true : false)
         .padding()
         .frame(maxWidth: .infinity)
         .font(.largeTitle)
