@@ -96,6 +96,15 @@ struct ContentView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        pushUpService.clearAllData()
+                    }, label: {
+                        Image(systemName: "circle")
+                    })
+                }
+            }
             .navigationBarTitle("PushUps")
         }
     }

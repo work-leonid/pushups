@@ -13,15 +13,15 @@ class PushUpService: ObservableObject {
     @Published var endWorkout = false
     
     private let maxPushUpsCountInOneWorkout = 4
-    static private let userDefaults = UserDefaults.standard
     static private let userDefaultsPushUpsByDaysKey = "pushupsByDaysCount"
     
     var pushupsByDayArray: [[Int]] {
         get {
-            PushUpService.userDefaults.array(forKey: PushUpService.userDefaultsPushUpsByDaysKey) as? [[Int]] ?? []
+            UserDefaults.standard.array(forKey: PushUpService.userDefaultsPushUpsByDaysKey) as? [[Int]] ?? []
         }
         set {
-            PushUpService.userDefaults.set(newValue, forKey: PushUpService.userDefaultsPushUpsByDaysKey)
+            UserDefaults.standard.set(newValue, forKey: PushUpService.userDefaultsPushUpsByDaysKey)
+            print(pushupsByDayArray.count)
         }
     }
 
@@ -73,5 +73,10 @@ class PushUpService: ObservableObject {
             pushUpsCurrentWorkout = [Int]()
             endWorkout = false
         }
+    }
+    
+    func clearAllData() {
+        UserDefaults.standard.removeObject(forKey: PushUpService.userDefaultsPushUpsByDaysKey)
+        pushupsByDayArray = [[Int]]()
     }
 }
