@@ -25,7 +25,7 @@ class PushUpService: ObservableObject {
         var str = [String]()
         for i in pushUpsByDays.indices {
             let arr = pushUpsByDays[i].map { String($0) }
-            let strin = arr.joined(separator: ". ")
+            let strin = arr.joined(separator: ", ")
             str.append(strin)
         }
         return str
@@ -53,11 +53,10 @@ class PushUpService: ObservableObject {
     }
     
     func saveDay() {
-        pushUpsByDays.append(pushUpsCurrentWorkout)
-        pushUpCount = 0
-        pushUpsCurrentWorkout = [Int]()
-//        for i in pushUpsByDays.indices {
-//            print(i)
-//        }
+        if !pushUpsCurrentWorkout.isEmpty {
+            pushUpsByDays.append(pushUpsCurrentWorkout)
+            pushUpCount = 0
+            pushUpsCurrentWorkout = [Int]()
+        }
     }
 }
